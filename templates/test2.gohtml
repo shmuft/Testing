@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <title>Тест 2</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script>
+        function sumName(clickedId) {
+            var sum = 0;
+            var count = 0;
+            var addText = "";
+            var ok = true;
+            console.log(clickedId);
+            var nam = "." + clickedId;
+            $(nam).each(function () {
+                if (!isNaN(parseInt($(this).val()))) {
+                    if (parseInt($(this).val()) < 2 && parseInt($(this).val()) != 0) {
+                        addText = " Значение меньше чем 2!";
+                        ok = false;
+                    }
+
+                    if (parseInt($(this).val()) < 0) {
+                        addText = " Значение меньше нуля!";
+                        ok = false;
+                    }
+
+                    sum += parseInt($(this).val());
+                    if (parseInt($(this).val()) != 0) {
+                        count++
+                    }
+                }
+            });
+            if (count > 4) {
+                ok = false
+                addText += " Выбрано больше четырёх!"
+            }
+            if (sum != 10 || !ok) {
+                $("#label_" + clickedId).text("Сумма составляет " + sum + " из 10!" + addText).css({"color": "red"})
+            } else {
+                $("#label_" + clickedId).text("Всё хорошо!").css({"color": "green"})
+            }
+        }
+
+        function check() {
+            var ok = true
+            $(".check").each(function () {
+                if ($(this).text() != "Всё хорошо!") {
+                    var target_top = $(this).offset().top;
+                    $('html, body').animate({scrollTop: target_top}, 'slow')
+                    ok = false
+                    return false
+                }
+            });
+
+            if (ok) {
+                return true
+            } else {
+                return false
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="main">
+    <div>
+        <h1>"Командные роли". Классификация ролей в группе.</h1>
+        Этот тест состоит из 7 отдельных блоков по 8 вопросов или утверждений, с которыми вы можете согласиться или не
+        согласиться.<br/>
+        На каждый блок у Вас есть 10 очков. Присваивать очки можно не больше, чем 3м или 4м утверждениям в блоке.<br/>
+        Если Вы согласны с каким-либо утверждением на все 100%, Вы можете отдать ему все 10 очков.<br/>
+        При этом одному предложению можно присвоить минимум 2 очка.<br/>
+        Проверьте, чтобы сумма всех очков по каждому блоку не превышала 10 баллов.<br/>
+    </div>
+    <form name="test2" action="/test2" method="POST" class="form" onsubmit="return(check())">
+        <ul>
+            {{range .}}
+            {{$Id := .Id}}
+            <li>
+                <h2>{{.Title}}</h2>
+                <!--<span class="required_notification">*Нужно заполнить</span>-->
+            </li>
+            {{range $index, $element := .Question}}
+            <li>
+                <label for="name{{$Id}}">{{$element}}</label>
+                <input name="name{{$Id}}-{{$index}}" type="number" class="name{{$Id}}" id="name{{$Id}}"
+                       oninput='sumName(this.id)'>
+            </li>
+            {{end}}
+            <li>
+                <h1 class="check" id="label_name{{$Id}}" style='color: red'>Сумма составляет 0 из 10!</h1>
+            </li>
+            {{end}}
+            <li>
+                <button type="submit" class="submit">Отправить</button>
+            </li>
+        </ul>
+    </form>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <title>Анкета</title>
+</head>
+<body>
+<div class="main">
+    <div>
+        <h1>Анкета участника исследования</h1>
+        1) Методика: Изучение мотивационного профиля личности<br/>
+        2) "Командные роли". Классификация ролей в группе.<br/>
+        3) Методика «Склонность к определенному стилю руководства»<br/>
+        <br/>
+        <h1>Анкета для заполнения:</h1>
+
+    </div>
+    <form name="anketa" action="/anketa" method="POST" class="form">
+        <ul>
+            <li>
+                <label for="name">Ваше имя</label>
+                <input name="name" type="text" id="name" required/>
+            </li>
+            <li>
+                <label for="sex">Ваш пол (м\ж)</label>
+                <select name="sex" id="sex" required>
+                    <option value="M">Муж</option>
+                    <option value="F">Женский</option>
+                </select>
+            </li>
+            <li>
+                <label for="age">Сколько Вам полных лет</label>
+                <input name="age" type="number" id="age" required/>
+            </li>
+            <li>
+                <label for="education">Образование</label>
+                <select name="education" id="education" required>
+                    <option value="1">Неполное среднее</option>
+                    <option value="2">Среднее</option>
+                    <option value="3">Специальное (Училище\Техникум)</option>
+                    <option value="4">Неполное высшее</option>
+                    <option value="5">Высшее</option>
+                    <option value="6">несколько высших образовании (2 и более)</option>
+                    <option value="7">ученая степень</option>
+                </select>
+            </li>
+            <li>
+                <label for="experience">Опыт управленческой деятельности, (сколько месяцев)</label>
+                <input name="experience" type="number" id="experience" required/>
+            </li>
+
+            <li>
+                <label for="howmanypeople">Сколько людей в подчинении (на данный момент)</label>
+                <input name="howmanypeople" type="number" id="howmanypeople" required/>
+            </li>
+
+            <li>
+                <label for="howlongworkprof">Как долго Вы работаете в данной должности (сколько месяцев)?</label>
+                <input name="howlongworkprof" type="number" id="howlongworkprof" required/>
+            </li>
+
+            <li>
+                <label for="howlongwork">Как долго Вы работаете в данной организации (сколько месяцев)?</label>
+                <input name="howlongwork" type="number" id="howlongwork" required/>
+            </li>
+
+            <li>
+                <button type="submit" class="submit">Отправить</button>
+            </li>
+        </ul>
+    </form>
+</div>
+
+</body>
+</html>

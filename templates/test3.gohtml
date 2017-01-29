@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <title>Тест 3</title>
+</head>
+<body>
+<div class="main">
+    <div>
+        <h1>3) Методика «Склонность к определенному стилю руководства»</h1>
+        Инструкция.<br/><br/> 
+        Представьте себе, что Вы руководите коллективом.<br/><br/>
+        Вам предлагается ответить, как бы Вы осуществляли это руководство в ситуациях, изложенных в опроснике.<br/><br/>
+        По каждому пункту опросника из трех вариантов ответа (а, б, в) выберите тот, который в большей степени характеризует ваше поведение в качестве руководителя,<br/><br/>
+        и выберите соответствующую букву.
+        <br/><br/>
+    </div>
+    <form name="test1" action="/test3" method="POST" class="form">
+        <ul>
+            {{range .}}
+            {{$Id := .Id}}
+            <li>
+                <h2>{{.Title}}</h2>
+                <!--<span class="required_notification">*Нужно заполнить</span>-->
+            </li>
+            {{range $index, $element := .Question}}
+            <li>
+                <label for="name{{$Id}}-{{$index}}">{{$element}}</label>
+                <input name="name{{$Id}}" type="radio" id="name{{$Id}}-{{$index}}" value="{{$index}}" required>
+            </li>
+            {{end}}
+            {{end}}
+            <li>
+                <button type="submit" class="submit">Отправить</button>
+            </li>
+        </ul>
+    </form>
+</div>
+</body>
+</html>

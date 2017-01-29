@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <title>Результаты</title>
+</head>
+<body>
+<div class="main">
+    <h1>Ваш результат:</h1>
+</div>
+
+<script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawBasic);
+
+    function drawBasic() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Параметр');
+        data.addColumn('number', 'Значение');
+
+        $.getJSON(
+            "/get_data_test1",
+            function (values) {
+                data2=[];
+                values.forEach(function (item) {
+                    data2.push([item.string, item.float32]);
+                });
+                data.addRows(data2);
+                var options = {
+                    title: 'Тест №1',
+                    hAxis: {
+                        title: 'Параметр',
+                    },
+                    vAxis: {
+                        title: 'Значение'
+                    }
+                };
+
+                var chart = new google.visualization.ColumnChart(
+                    document.getElementById('columnchart_values_test1'));
+
+                chart.draw(data, options);
+
+            });
+        var datatest2 = new google.visualization.DataTable();
+        datatest2.addColumn('string', 'Параметр');
+        datatest2.addColumn('number', 'Значение');
+
+        $.getJSON(
+            "/get_data_test2",
+            function (values) {
+                data2=[];
+                values.forEach(function (item) {
+                    data2.push([item.string, item.float32]);
+                });
+                datatest2.addRows(data2);
+                var options = {
+                    title: 'Тест №2',
+                    hAxis: {
+                        title: 'Параметр',
+                    },
+                    vAxis: {
+                        title: 'Значение'
+                    }
+                };
+
+                var chart2 = new google.visualization.ColumnChart(
+                    document.getElementById('columnchart_values_test2'));
+
+                chart2.draw(datatest2, options);
+
+            });
+
+        var datatest3 = new google.visualization.DataTable();
+        datatest3.addColumn('string', 'Параметр');
+        datatest3.addColumn('number', 'Значение');
+
+        $.getJSON(
+            "/get_data_test3",
+            function (values) {
+                data2=[];
+                values.forEach(function (item) {
+                    data2.push([item.string, item.float32]);
+                });
+                datatest3.addRows(data2);
+                var options = {
+                    title: 'Тест №3',
+                    hAxis: {
+                        title: 'Параметр',
+                    },
+                    vAxis: {
+                        title: 'Значение'
+                    }
+                };
+
+                var chart3 = new google.visualization.ColumnChart(
+                    document.getElementById('columnchart_values_test3'));
+
+                chart3.draw(datatest3, options);
+
+            });
+    }
+
+
+</script>
+
+<div id="columnchart_values_test1" style="width: 1200px; height: 300px;"></div>
+<div id="columnchart_values_test2" style="width: 1200px; height: 300px;"></div>
+<div id="columnchart_values_test3" style="width: 1200px; height: 300px;"></div>
+
+</body>
+</html>

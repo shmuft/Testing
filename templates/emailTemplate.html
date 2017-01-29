@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+</head>
+
+<body>
+<p>
+    Привет Таня!<br/>
+    Для тебя есть сообщение и анкентка с тестами!<br/>
+    Эта анкета от:<br/>
+<table border="1">
+    <thead>
+    <td>Email</td>
+    <td>Имя</td>
+    <td>Пол</td>
+    <td>Полных лет</td>
+    <td>Образование</td>
+    <td>Опыт управленческой деятельности</td>
+    <td>Сколько людей в подчинении (на данный момент)</td>
+    <td>Как долго работаете в данной должности</td>
+    <td>Как долго Вы работаете в данной организации</td>
+    </thead>
+    <tr>
+        <td>{{.UserName}}</td>
+        <td>{{.Ank.Name}}</td>
+        <td>{{.Ank.Sex}}</td>
+        <td>{{.Ank.Age}}</td>
+        <td>{{.Ank.Education}}</td>
+        <td>{{.Ank.Experience}}</td>
+        <td>{{.Ank.HowManyPeople}}</td>
+        <td>{{.Ank.HowLongWorkProf}}</td>
+        <td>{{.Ank.HowLongWork}}</td>
+    </tr>
+</table>
+
+Тест 1:<br/>
+<table border="1">
+    <thead>
+    <td>
+        Утверждение
+    </td>
+    {{range .T1.Headers}}
+    <td>
+        {{.}}
+    </td>
+    {{end}}
+    </thead>
+    <tr>
+        <td>
+            Итоги
+        </td>
+        {{range .T1.Values}}
+        <td>
+            {{.}}
+        </td>
+        {{end}}
+    </tr>
+</table>
+
+<br/>Тест 2:<br/>
+<table border="1">
+    <thead>
+    <td>
+        Утверждение
+    </td>
+    {{range .T2.Headers}}
+    <td>
+        {{.}}
+    </td>
+    {{end}}
+    </thead>
+    <tr>
+        <td>
+            Итоги
+        </td>
+        {{range .T2.Values}}
+        <td>
+            {{.}}
+        </td>
+        {{end}}
+    </tr>
+</table>
+<br/>Тест 3:<br/>
+<table border="1">
+    <thead>
+    <td>
+        Утверждение
+    </td>
+    {{range .T3.Headers}}
+    <td>
+        {{.}}
+    </td>
+    {{end}}
+    </thead>
+    <tr>
+        <td>
+            Итоги
+        </td>
+        {{range .T3.Values}}
+        <td>
+            {{.}}
+        </td>
+        {{end}}
+    </tr>
+</table>
+</p>
+
+</body>
+</html>

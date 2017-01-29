@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <title>Тест 1</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script>
+        function sumName(clickedId) {
+            var sum = 0;
+            var addText = "";
+            console.log(clickedId);
+            var nam = "." + clickedId;
+            ok = true
+            $(nam).each(function () {
+                if (!isNaN(parseInt($(this).val()))) {
+                    if (parseInt($(this).val()) < 0) {
+                        addText = " Значение меньше нуля!";
+                        ok = false;
+                    }
+
+                    sum += parseInt($(this).val())
+                }
+            });
+            if (sum != 11 || !ok) {
+                $("#label_" + clickedId).text("Сумма составляет " + sum + " из 11!"+addText).css({"color": "red"})
+            } else {
+                $("#label_" + clickedId).text("Всё хорошо!").css({"color": "green"})
+            }
+        }
+
+        function check() {
+            var ok = true
+            $(".check").each(function () {
+                if ($(this).text() != "Всё хорошо!") {
+                    var target_top = $(this).offset().top;
+                    $('html, body').animate({scrollTop: target_top}, 'slow')
+                    ok = false
+                    return false
+                }
+            });
+
+            if (ok) {
+                return true
+            } else {
+                return false
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="main">
+    <div class="divtext">
+        <h1>Методика: Изучение мотивационного профиля личности</h1><br/>
+        Инструкция<br/><br/>
+        Вам нужно распределить 11 баллов между четырьмя вариантами каждого из утверждений.<br/>
+        Если вам кажется, что один из факторов наиболее важен для Вас, оцените его в 11 баллов;<br/>
+        если же Вы полагаете, что его совсем несущественным, не присуждайте ему ни одного балла.<br/><br/>
+        В остальных случаях постарайтесь по собственному усмотрению распределить 11 баллов между четырьмя предложенными
+        в каждом утверждении факторами.<br/><br/>
+        Следите за тем, чтобы были присуждены все 11 баллов.<br/><br/>
+        Если Вы считаете наиболее для себя утверждения a и b, то можете присудить им 6 и 5 баллов соответственно, ничего
+        не оставляя для оценки других вариантов.<br/><br/>
+        Совершенно не важно, каким образом Вы будете распределять 11 баллов между четырьмя вариантами, самое главное,
+        чтобы оценки важности каждого варианта в сумме составляли 11 баллов.<br/>
+        <br/>
+        Баллы, присуждаемые Вами каждому фактору, следует вносить непосредственно в таблицу ответов.<br/>
+    </div>
+    <form name="test1" action="/test1" method="POST" class="form" onsubmit="return(check())">
+        <ul>
+            {{range .}}
+            {{$Id := .Id}}
+            <li>
+                <h2>{{.Title}}</h2>
+                <!--<span class="required_notification">*Нужно заполнить</span>-->
+            </li>
+            {{range $index, $element := .Question}}
+            <li>
+                <label for="name{{$Id}}">{{$element}}</label>
+                <input name="name{{$Id}}-{{$index}}" type="number" class="name{{$Id}}" id="name{{$Id}}"
+                       oninput='sumName(this.id)'>
+            </li>
+            {{end}}
+            <li>
+                <h1 class="check" id="label_name{{$Id}}" style='color: red'>Сумма составляет 0 из 11!</h1>
+            </li>
+            {{end}}
+            <li>
+                <button type="submit" class="submit">Отправить</button>
+            </li>
+        </ul>
+    </form>
+</div>
+</body>
+</html>
